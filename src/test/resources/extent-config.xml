@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extentreports>
+    <configuration>
+        <!-- Report theme: standard, dark -->
+        <theme>standard</theme>
+        
+        <!-- Document encoding -->
+        <encoding>UTF-8</encoding>
+        
+        <!-- Protocol for script and stylesheets: http, https -->
+        <protocol>https</protocol>
+        
+        <!-- Title of the document -->
+        <documentTitle>Automation Test Report</documentTitle>
+        
+        <!-- Report name displayed on report -->
+        <reportName>UI Automation Test Results</reportName>
+        
+        <!-- Timestamp format -->
+        <timeStampFormat>MMM dd, yyyy HH:mm:ss</timeStampFormat>
+        
+        <!-- Enable offline mode -->
+        <enableOfflineMode>true</enableOfflineMode>
+        
+        <!-- Custom CSS -->
+        <css>
+            .test-pass { color: green; }
+            .test-fail { color: red; }
+            .test-skip { color: orange; }
+        </css>
+        
+        <!-- Custom JavaScript -->
+        <scripts>
+            console.log('Extent Reports Initialized');
+        </scripts>
+    </configuration>
+</extentreports>

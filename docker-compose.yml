@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  selenium-hub:
+    image: selenium/hub:4.16.1
+    ports:
+      - "4444:4444"
+    environment:
+      - GRID_MAX_SESSION=5
+      - GRID_BROWSER_TIMEOUT=300
+      - GRID_TIMEOUT=300
+      
+  chrome:
+    image: selenium/node-chrome:4.16.1
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    shm_size: 2gb
+    
+  firefox:
+    image: selenium/node-firefox:4.16.1
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    shm_size: 2gb
+    
+  tests:
+    build: .
+    depends_on:
+      - selenium-hub
+      - chrome
+      - firefox
+    environment:
+      - SELENIUM_GRID_URL=http://selenium-hub:4444/wd/hub
+    volumes:
+      - ./test-output:/app/test-output
+      - ./target:/app/target
+    command: mvn clean test -Dselenium.grid.url=http://selenium-hub:4444/wd/hub
