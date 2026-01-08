@@ -61,6 +61,7 @@ reports/
 screenshots/
 allure-results/
 cucumber-reports/
+*.xml
 
 # OS files
 .DS_Store
